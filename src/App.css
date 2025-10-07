@@ -1,0 +1,343 @@
+.feedback-tag {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .feedback-tag {
+    position: fixed;
+    top: 40%;
+    right: 0;
+    transform: translateY(-85%);
+    transform-origin: right center;
+    rotate: -90deg;
+    width: 9rem;
+    height: 2.5rem;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 14px;
+    font-family: nippo, sans-serif;
+    letter-spacing: 2px;
+    background-color: #0000008e;
+    color: #fff;
+    border-radius: 4px;
+    border: none;
+    z-index: 9999;
+    cursor: pointer;
+  }
+}
+
+.form-container {
+  display: none;
+  /* Default: hidden in mobile */
+}
+
+@media (min-width: 768px) {
+  .form-container {
+    top: 50%;
+    left: 50%;
+    display: block;
+    position: fixed;
+    overflow: hidden;
+    padding: var(--p);
+    font-family: nippo;
+    text-align: center;
+    border-radius: 16px;
+    align-items: center;
+    width: var(--w-form);
+    pointer-events: none;
+    padding: 1.5rem;
+    opacity: 0;
+    height: var(--h-form);
+    border: 2px solid transparent;
+    transform: translate(-50%, -50%);
+    animation: border-glow 6s linear infinite;
+    background:
+      linear-gradient(#161616, #000000) padding-box,
+      linear-gradient(145deg, transparent 35%, #ffffff, #000000, #ffffff) border-box;
+    background-size: 200% 200%;
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    --p: 32px;
+    --h-form: auto;
+    --w-form: 380px;
+    --input-px: 0.75rem;
+    --input-py: 0.65rem;
+    --submit-h: 10rem;
+    --blind-w: 64px;
+    --space-y: 0.5rem;
+    z-index: 777;
+  }
+}
+
+/* Media query from vertical Ipad */
+@media (min-width: 768px) and (max-width: 1200px) and (orientation: portrait) {
+ .form-container {
+    width: 60vw;
+    max-height: 50vh;
+  }
+}
+
+/* Media query from horizontal Ipad */
+@media (min-width: 768px) and (max-width: 1200px) and (orientation: landscape) {
+ .form-container {
+    width: 50vw;
+    max-height: 66vh;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 3800px) {
+  .form-container {
+    width: 35vw;
+    max-height: 60vh;
+  }
+}
+
+.tiny-picture {
+  padding: 2px;
+  height: auto;
+  width: 80px;
+  border-radius: 2.2vw;
+  margin-bottom: 14px;
+  display: inline-block;
+  background:
+    linear-gradient(145deg, transparent 35%, #ffffff, #000000, #ffffff);
+  background-size: 200% 200%;
+  background-clip: padding-box;
+  animation: border-glow 6s linear infinite;
+}
+
+@media (min-width: 768px) {
+  .tiny-picture {
+    width: 100px;
+    border-radius: 1.5vw;
+  }
+}
+
+@media (min-width: 1200px) {
+  .tiny-picture {
+    width: 80px;
+    border-radius: 14px;
+  }
+}
+
+.form-container label.blind_input {
+  user-select: none;
+  cursor: pointer;
+  z-index: 4;
+  position: absolute;
+  border: none;
+  right: calc(var(--p) + (var(--input-px) / 2));
+  bottom: calc(var(--p) + var(--submit-h) + var(--space-y) + (var(--input-py) / 1) + 3px);
+  padding: 4px 0;
+  width: var(--blind-w);
+  border-radius: 4px;
+  background-color: #000000;
+  color: #4d4d4d;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.form {
+  order: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  width: 100%;
+}
+
+.input-data {
+  white-space: wrap;
+  font-size: 14px;
+  font-family: nippo;
+  margin-top: calc(var(--space-y) / 2);
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 400;
+  text-align: left;
+  margin-right: auto;
+  position: relative;
+  z-index: 99;
+  user-select: none;
+}
+
+.icons-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icons {
+  margin: 6px;
+  width: 24px;
+  height: auto;
+  display: inline-block;
+}
+
+@media (min-width: 768px) {
+  .icons {
+    width: 24px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .icons {
+    width: 25px;
+  }
+}
+
+.form .input {
+  width: 100%;
+  outline: none;
+  font-size: 18px;
+  border-radius: 6px;
+  color: #ffffffd5;
+  background: #0a0a0a;
+  font-family: sans-serif;
+  margin: var(--space-y) 0;
+  transition: all 0.25s ease;
+  border: .1px solid #ffffff;
+  padding: var(--input-py) var(--input-px);
+}
+
+.form .input:focus {
+  border: 1px solid #787878;
+  box-shadow: 0 0 0 2px #787878;
+}
+
+.form textarea.input {
+  resize: none;
+}
+
+.submit-button {
+  height: 2.5rem;
+  font-size: 16px;
+  font-family: nippo;
+  color: #fafafa;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border-radius: 10px;
+  border: 2px solid #fafafa;
+  background: #252525;
+  box-shadow: 3px 3px #fafafa;
+  cursor: pointer;
+  margin: 35px 0;
+}
+
+.submit-button:active {
+  box-shadow: none;
+  transform: translate(3px, 3px);
+}
+
+
+.blind-check:checked~.form .input[type="text"] {
+  -webkit-text-security: disc;
+}
+
+.form-submitted-container {
+  font-family: sans-serif;
+  overflow-y: auto;
+  padding: var(--p);
+  border-radius: 16px;
+  text-align: center;
+  align-items: center;
+}
+
+.sent-picture {
+  height: auto;
+  max-width: 24vw;
+  margin-top: -2rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+@media (min-width: 768px) {
+  .sent-picture {
+    max-width: 16vw;
+  }
+}
+
+@media (min-width: 1200px) {
+  .sent-picture {
+    max-width: 12vw;
+  }
+
+  .form .image-title {
+    font-size: 1.25rem;
+  }
+
+  .form .input,
+  .form .submit {
+    font-size: 1rem;
+  }
+}
+
+.thank-you-message {
+  font-family: nippo;
+}
+
+@keyframes border-glow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.form-container {
+  transition: opacity 0.3s ease;
+}
+
+.form-container.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100dvh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 666;
+  backdrop-filter: blur(3px);
+}
+
+.background {
+  top: 0;
+  left: 0;
+  width: 100vw;       
+  height: 100vh;      
+  overflow: hidden;
+  object-fit: cover;
+  position: fixed;
+  background-size: cover;   
+  background-position: center;  
+  background-repeat: no-repeat;
+  background-image: url("./assets/Images/parallax.jpg");
+}

@@ -1,0 +1,94 @@
+.body-projects {
+  display: grid;
+  max-width: 12vw;
+  transform: translate(0%, -32%) scale(0.28);
+}
+/* Media query from vertical Ipad */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  .body-projects {
+    position: absolute;
+    margin-top: 30rem;
+    left: 40%;
+    transform: translate(-350%, -50%) scale(0.6);
+  }
+}
+/* Media query from horizontal Ipad */
+@media (min-width: 768px) and (max-width: 1200px) and (orientation: landscape) {
+  .body-projects {
+    position: absolute;
+    margin-top: 0rem;
+    left: 50%;
+    transform: translate(-350%, -14%) scale(0.65);
+  }
+}
+@media (min-width: 1200px) {
+  .body-projects {
+    margin-top: 10px;
+    transform: translate(4%, 0%) scale(1);
+  }
+}
+
+.projects-container {
+    margin-top: 10rem;
+    width: 100%;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.projects-card {
+    display: grid;
+    height: 400px;
+    width: 420px;
+      display: grid;
+  grid:
+    "project-image" 1fr
+    "project-description" 1fr
+    / 1fr;
+  gap: 8px;
+    background: var(--clr-bg-soft);
+    border: 0.1vw solid var(--clr-border);
+    border-radius: var(--radius-base);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+}
+
+.project-image {
+  width: 358px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 2rem;
+  object-fit: cover;
+  text-align: center;
+  place-items: center;
+  aspect-ratio: 3 / 2;
+  justify-content: center;
+  grid-area: project-image;
+  border-radius: var(--radius-base);
+  border: 0.1vw solid var(--clr-border);
+}
+
+.project-description {
+  display: flex;
+  flex-wrap: nowrap; 
+  overflow-x: auto;   
+  white-space: nowrap;
+  grid-area: project-description;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem; 
+}
+
+.link-images {
+  display: flex;
+  flex-wrap: nowrap; 
+  overflow-x: auto;  
+  white-space: nowrap;
+  grid-area: project-description;
+  text-align: right;
+  justify-content: right;
+  align-items: right;
+  gap: 1rem; 
+}
