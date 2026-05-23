@@ -380,11 +380,21 @@ a svg {
 @media (min-width: 1200px) {
   .profile-blur {
     top: 30%;
-    left: 15.5rem;
+    left: 8.5rem;
+    width: 385px;
+    height: 385px;
   }
+
+  .image-profile-home {
+    width: 350px;
+    height: 350px;
+  }
+
   .dev-bio {
     top: 30%;
-    left: 36%;
+    left: 37%;
+    width: 780px;
+    height: 385px;
   }
 
   .dev-bio p {
@@ -394,19 +404,19 @@ a svg {
   .rotating-bat-3d {
     width: 120px;
     height: 120px;
-    margin: -36rem auto 0;
+    margin: -33rem auto 0;
   }
 
   .context-tittle {
-    margin-top: 1rem;
+    margin-top: -0.5rem;
     font-size: 3.5rem;
-    left: 48.2rem;
+    left: 41rem;
   }
 
   .context-sub-tittle {
-    margin-top: 0;
+    margin-top: -1rem;
     font-size: 1.6rem;
-    left: 42.5%;
+    left: 41.5%;
   }
 
   .dark-social {
@@ -442,7 +452,7 @@ a svg {
   .rotating-bat-3d {
     width: 120px;
     height: 120px;
-    margin: -40rem auto 0;
+    margin: -37rem auto 0;
   }
 
   .context-tittle {

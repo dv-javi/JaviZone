@@ -10,8 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "pnpm run build",
-    "deploy": "gh-pages -d dist -r https://github.com/dv-javi/javierprado.git",
-    "backup": "git add . && git commit -m && git push"
+    "deploy": "git add . && git commit -m \"deploy $(date)\" || true && git push && gh-pages -d dist -r https://github.com/dv-javi/javierprado.git"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

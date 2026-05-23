@@ -1,4 +1,3 @@
-import TechSkillCard from "@/Components/Cards/TechSkillCard";
 import "@/CssPages/about.css";
 const images = import.meta.glob(
   "@/assets/Images/*.{png,webp,avif,jpg,jpeg,svg}",
@@ -60,23 +59,6 @@ export default function AboutMe() {
           src={images["/src/assets/Images/lanyard.svg"]?.default}
         />
       </header>
-      <section className="techk-skills-side">
-        <TechSkillCard
-          TechLogo="VsCode"
-          TechTitle="Visual Studio Code"
-          TechType="Code Editor"
-        />
-        <TechSkillCard
-          TechLogo="React"
-          TechTitle="React JS"
-          TechType="Framework"
-        />
-        <TechSkillCard
-          TechLogo="JavaScript"
-          TechTitle="JavaScript"
-          TechType="Language"
-        />
-      </section>
     </>
   );
 }

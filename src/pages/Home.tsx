@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 import DecryptedText from "@/Components/TextAnimations/DecryptedText/DecryptedText";
 
 const images = import.meta.glob(
-  "../assets/Images/*.{png,webp,avif,jpg,jpeg,gif,svg}",
+  "@/assets/Images/*.{png,webp,avif,jpg,jpeg,gif,svg}",
   { eager: true },
 ) as Record<string, { default: string }>;
 
@@ -135,7 +135,7 @@ export default function Home() {
           >
             <img
               className="image-profile-home"
-              src={images["../assets/Images/image-profile.svg"]?.default}
+              src={images["/src/assets/Images/image-profile.svg"]?.default}
             />
           </div>
 
