@@ -1,25 +1,38 @@
-import { HashRouter, Route, Routes } from 'react-router-dom';
-import { useRef, useEffect, useState } from 'react';
-import NotFound from './pages/NotFound';
-import Projects from './pages/Projects';
-import emailjs from '@emailjs/browser';
-import AboutMe from './pages/AboutMe';
-import Navbar from './pages/Navbar';
-import Home from './pages/Home';
-import Lenis from '@studio-freight/lenis'; // puedes cambiar a 'lenis' si actualizás el paquete
-import './App.css';
+import { HashRouter, Route, Routes, useLocation } from "react-router-dom";
+import { useRef, useEffect, useState } from "react";
+import NotFound from "@/pages/NotFound";
+import Projects from "@/pages/Projects";
+import emailjs from "@emailjs/browser";
+import About from "@/pages/About";
+import Me from "@/pages/Me";
+import Navbar from "@/pages/Navbar";
+import Home from "@/pages/Home";
+import Lenis from "@studio-freight/lenis";
+import "@/app.css";
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+  }, [pathname]);
+
+  return null;
+}
 
 function App() {
-  const images = import.meta.glob('./assets/Images/*.{png,webp,avif,jpg,jpeg}', { eager: true }) as Record<
-    string,
-    { default: string }
-  >;
+  const images = import.meta.glob(
+    "@/assets/Images/*.{png,webp,avif,jpg,jpeg,svg}",
+    { eager: true },
+  ) as Record<string, { default: string }>;
 
   const form = useRef<HTMLFormElement | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
+  const lenisRef = useRef<Lenis | null>(null);
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -29,35 +42,32 @@ function App() {
     setIsSubmitted(true);
 
     emailjs
-      .sendForm('Portfolio_dm', 'portfolio_template', form.current, {
-        publicKey: '7VuSwVcSerDi5fylS',
+      .sendForm("Portfolio_Dm", "portfolio_template", form.current, {
+        publicKey: "7VuSwVcSerDi5fylS",
       })
       .then(
         () => {
-          console.log('SUCCESS!');
+          console.log("SUCCESS!");
           setIsSending(false);
         },
         (error) => {
-          console.log('FAILED...', error.text);
+          console.log("FAILED...", error.text);
           setIsSending(false);
           setIsSubmitted(false);
-        }
+        },
       );
   };
 
-  // Mantén el title en su propio useEffect (como ya tenías)
   useEffect(() => {
-    document.title = 'Javier Prado';
+    document.title = "Javier Prado";
   }, []);
 
-  // Lenis init (corregido: no usar `smoothTouch`)
   useEffect(() => {
     const lenis = new Lenis({
-      duration: 1.2,       // easing duration
-      smoothWheel: true,   // suaviza wheel/mouse
-      // syncTouch: true,  // <-- habilita esta si querés imitar suavizado en touch (puede ser inestable en algunos iOS)
-      // touchMultiplier: 1, // ajustar fuerza del touch si lo necesitás
+      duration: 1.2,
+      smoothWheel: true,
     });
+    lenisRef.current = lenis;
 
     function raf(time: number) {
       lenis.raf(time);
@@ -70,61 +80,166 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const lenis = lenisRef.current;
+    const html = document.documentElement;
+    const body = document.body;
+
+    if (showModal) {
+      const currentScroll = lenis ? lenis.scroll : window.scrollY;
+      lenis?.stop();
+      html.style.overflow = "hidden";
+      body.style.overflow = "hidden";
+      body.style.touchAction = "none";
+      body.dataset.scroll = String(currentScroll);
+    } else {
+      html.style.overflow = "";
+      body.style.overflow = "";
+      body.style.touchAction = "";
+
+      const savedScroll = parseFloat(body.dataset.scroll || "0");
+      window.scrollTo(0, savedScroll);
+
+      lenis?.start();
+    }
+
+    return () => {
+      html.style.overflow = "";
+      body.style.overflow = "";
+      body.style.touchAction = "";
+    };
+  }, [showModal]);
+
   return (
-    <><div className="background"/>
-    
+    <>
       <HashRouter>
         <Navbar />
+        <ScrollToTop />
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/Projects' element={<Projects />} />
-          <Route path='/AboutMe' element={<AboutMe />} />
-          <Route path='*' element={<NotFound />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/Projects" element={<Projects />} />
+          <Route path="/About" element={<About />} />
+          <Route path="/Me" element={<Me />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </HashRouter>
 
       <section>
-        <button className="feedback-tag" id="feedback-tag" onClick={() => setShowModal(true)}>
+        <button
+          className="feedback-tag"
+          id="feedback-tag"
+          onClick={() => setShowModal(true)}
+        >
           Feedback
         </button>
 
-        {/* Overlay */}
-        {showModal && <div className="modal-overlay" onClick={() => setShowModal(false)} />}
+        {showModal && (
+          <div className="modal-overlay" onClick={() => setShowModal(false)} />
+        )}
 
-        {/* Modal */}
-        <div className={`form-container ${showModal ? 'visible' : ''}`} onClick={(e) => e.stopPropagation()}>
+        <div
+          className={`form-container ${showModal ? "visible" : ""}`}
+          onClick={(e) => e.stopPropagation()}
+        >
           <form className="form" ref={form} onSubmit={sendEmail}>
             {!isSubmitted ? (
               <>
-                <img className="tiny-picture" src={images['./assets/Images/slf.jpeg']?.default} />
+                <img
+                  className="tiny-picture"
+                  src={images["/src/assets/Images/image-profile.svg"]?.default}
+                />
                 <div className="image-title">Any insights?</div>
 
                 <label className="input-data" htmlFor="name-input">
                   <span className="icons-container">
                     Name
-                    <img className="icons" src={images['./assets/Images/name.png']?.default} />
+                    <svg
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="m8 9 3 3-3 3m5 0h3M4 19h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z"
+                      />
+                    </svg>
                   </span>
                 </label>
-                <input className="input" type="text" name="user_name" id="name-input" required />
+
+                <input
+                  className="input"
+                  type="text"
+                  name="user_name"
+                  id="name-input"
+                  placeholder="Enter your name"
+                  autoComplete="name"
+                  minLength={2}
+                  maxLength={60}
+                  pattern="^[A-Za-zÀ-ÿ\s]+$"
+                  required
+                  onInput={(e) => {
+                    e.currentTarget.value = e.currentTarget.value.replace(
+                      /[^A-Za-zÀ-ÿ\s]/g,
+                      "",
+                    );
+                  }}
+                />
 
                 <label className="input-data" htmlFor="msg-input">
                   <span className="icons-container">
                     Message
-                    <img className="icons" src={images['./assets/Images/message.png']?.default} />
+                    <svg
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M9 17h6l3 3v-3h2V9h-2M4 4h11v8H9l-3 3v-3H4V4Z"
+                      />
+                    </svg>
                   </span>
                 </label>
-                <textarea className="input" name="message" id="msg-input" required />
 
+                <textarea
+                  className="input"
+                  id="msg-input"
+                  name="message"
+                  placeholder="Write your feedback..."
+                  minLength={10}
+                  maxLength={500}
+                  rows={4}
+                  required
+                ></textarea>
                 <button className="submit-button" type="submit">
-                  {isSending ? 'Sending...' : 'Submit'}
+                  {isSending ? "Sending..." : "Submit"}
                 </button>
               </>
             ) : (
               <div className="form-submitted-container">
                 <div className="form-submit-btn sent">
-                  <img className="sent-picture" src={images['./assets/Images/dvp.avif']?.default} />
+                  <img
+                    className="sent-picture"
+                    src={
+                      images["/src/assets/Images/developer-mac.svg"]?.default
+                    }
+                  />
                 </div>
-                <p className="thank-you-message">¡Appreciate it, I'll factor that in.!</p>
+                <p className="thank-you-message">
+                  ¡Appreciate it, I'll factor that in.!
+                </p>
               </div>
             )}
           </form>

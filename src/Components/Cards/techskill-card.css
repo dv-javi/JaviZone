@@ -1,0 +1,58 @@
+:root {
+  --radius-card-base: 16px;
+  --clr-bg-logo: #00000061;
+}
+
+.tech-card {
+  width: 280px;
+  height: 100px;
+  left: 20%;
+  position: relative;
+  background: var(--clr-bg-soft);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border: 0.1vw solid var(--clr-border);
+  border-radius: var(--radius-card-base);
+  display: grid;
+  grid:
+    "tech-logo tech-description" 1fr
+    / 0.5fr 1fr;
+}
+
+.tech-logo {
+  width: 60px;
+  height: auto;
+  grid-area: tech-logo;
+  justify-self: center;
+  align-self: center;
+  padding: 10px;
+  background: var(--clr-bg-logo);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  border: 0.1vw solid var(--clr-border);
+  border-radius: var(--radius-card-base);
+}
+
+.tech-description {
+  justify-self: start;
+  align-self: center;
+  margin: 0;
+
+  grid-area: tech-description;
+
+  display: grid;
+  grid:
+    "tech-name" auto
+    "tech-type" auto
+    / 1fr;
+}
+
+.tech-name {
+  font-size: 20px;
+}
+
+.tech-type {
+  font-size: 14px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}

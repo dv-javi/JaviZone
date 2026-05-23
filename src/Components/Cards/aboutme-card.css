@@ -1,0 +1,128 @@
+.card-info {
+  width: 100%;
+  height: 50rem;
+  display: grid;
+  grid: "card-title card-title card-title" auto "card-description card-description icon-card" auto "cards cards cards" 1fr / 1fr 1fr 1fr;
+  gap: 8px;
+  color: var(--clr-light);
+  backdrop-filter: var(--blur);
+  background: var(--clr-bg-soft);
+  border-radius: var(--radius-base);
+  -webkit-backdrop-filter: var(--blur);
+  border: 0.1vw solid var(--clr-border);
+}
+
+.card-title {
+  font-size: 28px;
+  margin-top: 2.5rem;
+  margin-left: 2.5rem;
+  text-align: left;
+  font-family: nippo;
+  grid-area: card-title;
+  color: var(--clr-light);
+}
+
+.card-description {
+  margin-top: 0;
+  text-align: left;
+  margin-bottom: 10px;
+  font-size: 20px;
+  grid-area: card-description;
+  line-height: 1.45;
+  margin-left: 2.5rem;
+  font-family: nippo;
+  color: var(--clr-subtle);
+}
+
+.icon-card {
+  grid-area: icon-card;
+  width: 70px;
+  margin-top: -3rem;
+  margin-left: -5.8rem;
+}
+
+.cards {
+  width: 100%;
+  display: grid;
+  margin-top: 30px;
+  margin-left: 1.6rem;
+  grid: "mc1 mc2 mc3" 0.5fr "t1 t2 t3" auto "yt yt yt" 0.5fr / auto auto auto;
+  gap: 10px;
+}
+
+.mini-card {
+  width: 358px;
+  overflow: hidden;
+  object-fit: cover;
+  aspect-ratio: 16 / 9;
+  color: var(--clr-light);
+  backdrop-filter: var(--blur);
+  background: var(--clr-bg-soft);
+  border-radius: var(--radius-base);
+  -webkit-backdrop-filter: var(--blur);
+  border: 0.1vw solid var(--clr-border);
+}
+
+.mc1 {
+  grid-area: mc1;
+}
+
+.mc2 {
+  grid-area: mc2;
+}
+
+.mc3 {
+  grid-area: mc3;
+}
+
+.card-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.title-image {
+  margin-top: -5rem;
+  font-size: 18px;
+  justify-content: center;
+  text-align: center;
+  font-family: nippo;
+  color: #fff;
+}
+
+.logo-section {
+  text-align: center;
+  font-size: 25px;
+  grid-area: yt;
+  margin-top: 0rem;
+  margin-bottom: 2rem;
+  font-family: nippo;
+  color: var(--clr-subtle);
+}
+
+.arrow {
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  width: 300px;
+  margin-top: -14rem;
+  margin-left: 2.5rem;
+  transform: rotate(calc(var(--r) * 1deg));
+  transition:
+    0.5s,
+    color 0.1s;
+  -webkit-transition:
+    0.5s,
+    color 0.1s;
+  -moz-transition:
+    0.5s,
+    color 0.1s;
+}
+
+.logo:hover {
+  transform: scale3d(1.5, 1.5, 0.3);
+  -webkit-transform: scale3d(1.2, 1.2, 0.3);
+  -moz-transform: scale3d(1.3, 1.3, 0.3);
+}

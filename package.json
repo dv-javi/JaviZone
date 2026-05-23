@@ -9,7 +9,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "npm run build",
+    "predeploy": "pnpm run build",
     "deploy": "gh-pages -d dist -r https://github.com/dv-javi/javierprado.git",
     "backup": "git add . && git commit -m && git push"
   },

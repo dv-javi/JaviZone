@@ -17,6 +17,17 @@ dist-ssr
 !.vscode/extensions.json
 .idea
 .DS_Store
+**/.DS_Store
+
+# Apple macOS garbage
+._*
+**/.*
+!**/.git/
+!**/.github/
+!**/.vscode/
+!**/.gitignore
+
+# Otros comunes
 *.suo
 *.ntvs*
 *.njsproj

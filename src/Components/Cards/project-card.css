@@ -1,0 +1,103 @@
+.project-link {
+  text-decoration: none;
+}
+
+.projects-card {
+  height: 28rem;
+  width: 80rem;
+  display: grid;
+  background: linear-gradient(
+    135deg,
+    var(--color-start),
+    var(--color-mid),
+    var(--color-end)
+  );
+  border-radius: var(--radius-base);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: box-shadow 0.4s ease;
+  display: grid;
+  grid:
+    "project-aside-card project-image" 100%
+    / 1fr 1fr;
+  margin-bottom: 20px;
+}
+
+.projects-card:hover {
+  box-shadow: 0 0 0 2px #ffffff;
+}
+
+.project-aside-card {
+  position: relative;
+  grid-area: project-aside-card;
+  width: 100%;
+  height: 100%;
+}
+
+.project-icon {
+  position: absolute;
+  top: 1.5rem;
+  right: 32.5rem;
+  width: 100px;
+  z-index: 3;
+  margin: 0;
+}
+
+.project-title {
+  position: absolute;
+  top: 8rem;
+  left: 2rem;
+  font-size: 26px;
+  font-family: "Titles";
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0;
+}
+
+.project-description {
+  position: absolute;
+  top: 11rem;
+  left: 2rem;
+  font-size: 14px;
+  font-family: nippo;
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0;
+}
+
+.tech-stack {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1rem;
+}
+
+.tech-stack li + li::before {
+  content: "•";
+  margin-right: 0.5rem;
+}
+
+.project-image {
+  width: 640px;
+  display: block;
+  margin-top: 2rem;
+  margin-left: -6rem;
+  border-radius: 2rem;
+  object-fit: cover;
+  text-align: center;
+  place-items: center;
+  aspect-ratio: 3 / 2;
+  justify-content: center;
+  grid-area: project-image;
+  z-index: 2;
+}
