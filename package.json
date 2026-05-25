@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "pnpm run build",
-    "deploy": "git add . && git commit -m \"deploy $(date)\" || true && git push && gh-pages -d dist -r https://github.com/dv-javi/javierprado.git"
+    "deploy": "git add . && git commit -m \"deploy $(date)\" || true && git push && gh-pages -d dist -r https://github.com/dv-javi/javierprado_.git"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

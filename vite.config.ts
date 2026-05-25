@@ -3,7 +3,7 @@ import path from "path";
 import react from "@vitejs/plugin-react-swc";
 
 export default defineConfig({
-  base: "/javierprado_/",
+  base: "https://dv-javi.github.io/javierprado_",
   plugins: [react()],
   resolve: {
     alias: {
