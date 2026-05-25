@@ -1,4 +1,6 @@
 import "@/CssPages/about.css";
+import TechSkillCard from "@/Components/Cards/TechSkillCard";
+
 const images = import.meta.glob(
   "@/assets/Images/*.{png,webp,avif,jpg,jpeg,svg}",
   { eager: true },
@@ -26,7 +28,6 @@ export default function AboutMe() {
   return (
     <>
       <title>Javier Prado</title>
-
       <header className="header-grid">
         <div className="bio-container">
           <div className="bio-header">
@@ -56,9 +57,36 @@ export default function AboutMe() {
           data-aos="fade-up"
           data-aos-duration="1200"
           className="lanyard"
-          src={images["/src/assets/Images/lanyard.svg"]?.default}
+          src={images["/src/assets/Images/lanyard.avif"]?.default}
         />
       </header>
+      <section className="tech-skills-side">
+        <TechSkillCard
+          TechLogo="VsCode"
+          TechTitle="Visual Studio Code"
+          TechType="Code Editor"
+        />
+        <TechSkillCard
+          TechLogo="Canva"
+          TechTitle="Canva"
+          TechType="Desing App"
+        />
+        <TechSkillCard
+          TechLogo="React"
+          TechTitle="React"
+          TechType="Framework"
+        />
+        <TechSkillCard
+          TechLogo="GitHub"
+          TechTitle="GitHub"
+          TechType="Repository"
+        />
+        <TechSkillCard
+          TechLogo="JavaScript"
+          TechTitle="JavaScript"
+          TechType="Language"
+        />
+      </section>
     </>
   );
 }

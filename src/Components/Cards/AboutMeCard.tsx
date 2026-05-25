@@ -29,8 +29,9 @@ export default function AboutMeCard({
   logoLink,
 }: ContentCardProps) {
   const imageSrcs = imagesArray.map((name) => {
-    const path = `/src/assets/Images/Cards/AboutMe/${name}.svg`;
-    return images[path]?.default || "";
+    const avifPath = `/src/assets/Images/Cards/AboutMe/${name}.avif`;
+    const svgPath = `/src/assets/Images/Cards/AboutMe/${name}.svg`;
+    return images[avifPath]?.default || images[svgPath]?.default || "";
   });
 
   return (

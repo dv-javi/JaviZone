@@ -11,6 +11,19 @@
   align-items: start;
 }
 
+.about-bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  overflow: hidden;
+}
+.about-bg canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
 .bio-container {
   grid-area: bio;
   margin: 0 0 0 1rem;
@@ -106,6 +119,15 @@
   height: auto;
   border-radius: var(--radius-base);
   margin: 0 auto;
+}
+
+.tech-skills-side {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
 /* ── Verrtical Ipad ── */
@@ -239,4 +261,17 @@
     height: auto;
     margin-left: 0.1rem;
   }
+}
+
+.about-background {
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  object-fit: cover;
+  position: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }

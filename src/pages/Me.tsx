@@ -83,7 +83,7 @@ export default function Me() {
               <img
                 className="bike-image-card"
                 src={
-                  images["/src/assets/Images/Cards/AboutMe/bike1.svg"]?.default
+                  images["/src/assets/Images/Cards/AboutMe/bike1.avif"]?.default
                 }
               />
             </div>
@@ -91,7 +91,7 @@ export default function Me() {
               <img
                 className="bike-image-card"
                 src={
-                  images["/src/assets/Images/Cards/AboutMe/bike2.svg"]?.default
+                  images["/src/assets/Images/Cards/AboutMe/bike2.avif"]?.default
                 }
               />
             </div>
@@ -99,7 +99,7 @@ export default function Me() {
               <img
                 className="bike-image-card"
                 src={
-                  images["/src/assets/Images/Cards/AboutMe/bike3.svg"]?.default
+                  images["/src/assets/Images/Cards/AboutMe/bike3.avif"]?.default
                 }
               />
             </div>
@@ -107,7 +107,7 @@ export default function Me() {
               <img
                 className="bike-image-card"
                 src={
-                  images["/src/assets/Images/Cards/AboutMe/bike4.svg"]?.default
+                  images["/src/assets/Images/Cards/AboutMe/bike4.avif"]?.default
                 }
               />
             </div>

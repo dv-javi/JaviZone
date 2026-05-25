@@ -37,7 +37,9 @@ const Navbar = () => {
             <li data-aos="fade-down" data-aos-duration="2200">
               <NavLink to="/About">About</NavLink>
             </li>
-
+            <li data-aos="fade-down" data-aos-duration="2600">
+              <NavLink to="/Me">Me?</NavLink>
+            </li>
             <li data-aos="fade-down" data-aos-duration="2800">
               <a
                 href="https://drive.google.com/file/d/1FsbPk7JvVt7xrduToyQ_w7OH00YWnH60/view?usp=drive_link"

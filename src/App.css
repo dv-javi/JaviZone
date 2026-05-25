@@ -306,19 +306,3 @@
     font-size: 1rem;
   }
 }
-
-@media (max-width: 768px) {
-  .background {
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    object-fit: cover;
-    position: absolute;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-image: url("@/assets/Images/Backgrounds/mobile.svg");
-  }
-}

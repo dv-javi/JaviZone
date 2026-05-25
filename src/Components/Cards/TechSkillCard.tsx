@@ -29,10 +29,10 @@ export default function TechSkillCard({
           <h1 className="tech-name">
             <ShinyText
               text={TechTitle}
-              speed={5}
+              speed={7}
               delay={0}
-              color="#00000081"
-              shineColor="#ffffff"
+              color="#ffffffde"
+              shineColor="#2d2d2d7b"
             />
           </h1>
           <span className="tech-type">{TechType}</span>

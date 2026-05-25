@@ -6,6 +6,7 @@ export default function projects() {
     <>
       <title>Javier Prado</title>
       <div className="body-projects">
+        <div className="project-efect"></div>
         <main className="projects-container">
           <ProjectCard
             ProjectName="NailsStudio"

@@ -248,6 +248,20 @@ a svg {
 
 /* ── Mobile ── */
 @media (max-width: 768px) {
+  .home-background {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    object-fit: cover;
+    position: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("@/assets/Images/Backgrounds/mobile.svg");
+  }
+
   .home-section-1 {
     border-top-left-radius: 6rem;
     border-top-right-radius: 6rem;
@@ -404,19 +418,19 @@ a svg {
   .rotating-bat-3d {
     width: 120px;
     height: 120px;
-    margin: -33rem auto 0;
+    margin: -34.5rem auto 0;
   }
 
   .context-tittle {
-    margin-top: -0.5rem;
+    margin-top: 0.5rem;
     font-size: 3.5rem;
-    left: 41rem;
+    left: 40.5rem;
   }
 
   .context-sub-tittle {
-    margin-top: -1rem;
-    font-size: 1.6rem;
-    left: 41.5%;
+    margin-top: -0.5rem;
+    font-size: 1.8rem;
+    left: 40%;
   }
 
   .dark-social {

@@ -1,7 +1,7 @@
 import "@/CssPages/home.css";
 import { useRef, useState } from "react";
-import PixelBlast from "@/Components/Bg-blast/PixelBlast";
 import { motion, useInView } from "framer-motion";
+import PixelBlast from "@/Components/Bg-blast/PixelBlast";
 import DecryptedText from "@/Components/TextAnimations/DecryptedText/DecryptedText";
 
 const images = import.meta.glob(
@@ -135,7 +135,7 @@ export default function Home() {
           >
             <img
               className="image-profile-home"
-              src={images["/src/assets/Images/image-profile.svg"]?.default}
+              src={images["/src/assets/Images/image-profile.avif"]?.default}
             />
           </div>
 

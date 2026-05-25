@@ -67,7 +67,7 @@ export default function ProjectCard({
           className="project-image"
           src={
             images[
-              `/src/assets/Images/Cards/Projects/Miniatures/${ProjectName}.svg`
+              `/src/assets/Images/Cards/Projects/Miniatures/${ProjectName}.avif`
             ]?.default
           }
         />

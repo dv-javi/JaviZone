@@ -1,5 +1,6 @@
 import { HashRouter, Route, Routes, useLocation } from "react-router-dom";
 import { useRef, useEffect, useState } from "react";
+import Galaxy from "@/Components/Bg-about/Galaxy";
 import NotFound from "@/pages/NotFound";
 import Projects from "@/pages/Projects";
 import emailjs from "@emailjs/browser";
@@ -7,8 +8,29 @@ import About from "@/pages/About";
 import Me from "@/pages/Me";
 import Navbar from "@/pages/Navbar";
 import Home from "@/pages/Home";
-import Lenis from "@studio-freight/lenis";
+import Lenis from "lenis";
 import "@/app.css";
+
+const Background = () => {
+  return (
+    <div className="about-bg">
+      <Galaxy
+        mouseRepulsion
+        mouseInteraction
+        density={1}
+        glowIntensity={0.2}
+        saturation={0}
+        hueShift={120}
+        twinkleIntensity={0.3}
+        rotationSpeed={0.1}
+        repulsionStrength={1}
+        autoCenterRepulsion={0}
+        starSpeed={0.2}
+        speed={0.5}
+      />
+    </div>
+  );
+};
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -115,6 +137,7 @@ function App() {
       <HashRouter>
         <Navbar />
         <ScrollToTop />
+        <Background />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Projects" element={<Projects />} />
@@ -146,7 +169,7 @@ function App() {
               <>
                 <img
                   className="tiny-picture"
-                  src={images["/src/assets/Images/image-profile.svg"]?.default}
+                  src={images["/src/assets/Images/image-profile.avif"]?.default}
                 />
                 <div className="image-title">Any insights?</div>
 
