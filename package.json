@@ -1,9 +1,9 @@
 {
-  "name": "javierprado",
+  "name": "dev-javi",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://dv-javi.github.io/javierprado",
+  "homepage": "https://dv-javi.github.io/dev-javi",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
