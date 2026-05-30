@@ -1,0 +1,166 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+nav {
+  padding: 0.5rem 1rem;
+  border-radius: 14px;
+  position: fixed;
+  top: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%) scale(0.8);
+  z-index: 999;
+  white-space: nowrap;
+}
+
+.routes {
+  list-style: none;
+  display: flex;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-logo-right {
+  display: flex;
+  position: fixed;
+  margin-top: -20px;
+  margin-left: 19rem;
+}
+
+.nav-logo-left {
+  display: flex;
+  position: fixed;
+  margin-top: -20px;
+  margin-left: -4.5rem;
+}
+
+.portfolio-logo,
+.outlook-logo {
+  width: 60px;
+  z-index: 999;
+  margin-top: 0;
+  display: flex;
+}
+
+li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: bold;
+  position: relative;
+  padding: 0 0.5rem 4px 0.5rem;
+}
+
+li a:hover::after,
+li a.active::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background: white;
+  border-radius: 999px;
+}
+
+/* ── Verrtical Ipad ── */
+@media (min-width: 768px) and (max-width: 1080px) and (orientation: portrait) {
+  nav {
+    transform: translateX(-50%) scale(1);
+  }
+
+  .portfolio-logo,
+  .outlook-logo {
+    width: 50px;
+  }
+
+  .nav-logo-left,
+  .nav-logo-right {
+    margin-top: -18px;
+  }
+
+  .nav-logo-right {
+    margin-left: 26rem;
+  }
+
+  .nav-logo-left {
+    margin-left: -10rem;
+  }
+}
+
+/* ── Horizontal Ipad ── */
+@media (min-width: 768px) and (max-width: 1280px) and (orientation: landscape) {
+  nav {
+    transform: translateX(-50%) scale(1);
+  }
+
+  .portfolio-logo,
+  .outlook-logo {
+    width: 60px;
+  }
+
+  .nav-logo-left,
+  .nav-logo-right {
+    margin-top: -24px;
+  }
+
+  .nav-logo-right {
+    margin-left: 34rem;
+  }
+
+  .nav-logo-left {
+    margin-left: -19rem;
+  }
+}
+/* ── Macbook ── */
+@media (min-width: 1280px) {
+  nav {
+    transform: translateX(-50%) scale(1);
+  }
+
+  .portfolio-logo,
+  .outlook-logo {
+    width: 60px;
+  }
+
+  .nav-logo-left,
+  .nav-logo-right {
+    margin-top: -20px;
+  }
+
+  .nav-logo-right {
+    margin-left: 42rem;
+  }
+
+  .nav-logo-left {
+    margin-left: -27.5rem;
+  }
+}
+
+/* ── Desktop Screens ── */
+@media (min-width: 1670px) {
+  nav {
+    transform: translateX(-50%) scale(1);
+  }
+
+  .portfolio-logo,
+  .outlook-logo {
+    width: 60px;
+  }
+
+  .nav-logo-left,
+  .nav-logo-right {
+    margin-top: -20px;
+  }
+
+  .nav-logo-right {
+    margin-left: 45.5rem;
+  }
+
+  .nav-logo-left {
+    margin-left: -31rem;
+  }
+}

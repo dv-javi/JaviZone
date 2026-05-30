@@ -31,7 +31,7 @@
 html,
 body {
   overscroll-behavior: none;
-  background-color: black; /* o el color de tu bg */
+  background-color: black;
 }
 
 :root {

@@ -1,0 +1,488 @@
+.home-section-1 {
+  position: absolute;
+  background-color: rgb(0, 0, 0);
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 84rem;
+  object-fit: cover;
+  z-index: 1;
+  border-top-left-radius: 50rem;
+  border-top-right-radius: 50rem;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 10%, black 0%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 12%);
+}
+
+.profile-blur {
+  position: fixed;
+  top: 30%;
+  left: 18%;
+  transform: translate(-50%, -50%);
+  height: 340px;
+  width: 340px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--clr-light);
+  border-radius: 34px;
+  background: rgba(0, 0, 0, 0.301);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgb(22, 22, 22);
+  box-shadow:
+    0 8px 32px 0 rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.image-profile-home {
+  position: absolute;
+  border-radius: var(--radius-base);
+  width: 300px;
+  height: 300px;
+}
+
+.dev-bio {
+  position: fixed;
+  top: 30%;
+  left: 37.5%;
+  width: 800px;
+  height: 340px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: var(--clr-light);
+  border-radius: var(--radius-base);
+  background: rgba(0, 0, 0, 0.301);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgb(22, 22, 22);
+  box-shadow:
+    0 8px 32px 0 rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.dev-bio::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.548),
+    rgba(0, 0, 0, 0.548)
+  );
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.dev-bio h1 {
+  margin-top: -2rem;
+  font-size: 1.8rem;
+  font-family: nippo;
+  z-index: 1;
+}
+
+.dev-bio p {
+  margin-top: 1rem;
+  font-size: 1rem;
+  max-width: 920px;
+  font-family: nippo;
+  text-shadow: 0 2px 8px rgb(0, 0, 0);
+  z-index: 1;
+}
+
+.home-section-2 {
+  position: absolute;
+  background-color: black;
+  top: 230%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 10%, black 0%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 12%);
+}
+
+.intro-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 3.5rem;
+  font-family: nippo;
+  text-align: center;
+  z-index: 2;
+}
+
+.intro-sub-text {
+  position: absolute;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 1.2rem;
+  font-family: nippo;
+  text-align: center;
+  z-index: 2;
+}
+
+.context-tittle {
+  position: absolute;
+  top: 44%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 5rem;
+  font-family: nippo;
+  text-align: center;
+  z-index: 2;
+  text-shadow: 0 2px 8px rgb(0, 0, 0);
+}
+
+.context-sub-tittle {
+  position: absolute;
+  top: 54%;
+  left: 41.5%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 2rem;
+  font-family: nippo;
+  text-align: center;
+  z-index: 2;
+  text-shadow: 0 2px 8px rgb(0, 0, 0);
+}
+
+.rotating-bat-3d {
+  width: 180px;
+  height: 180px;
+  display: block;
+  margin: -42rem auto 0;
+  filter: drop-shadow(0 0 12px #ffffff55);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  will-change: transform;
+}
+
+.dark-social {
+  position: absolute;
+  width: 85px;
+  height: 85px;
+  top: 66%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.dark-blur-icons {
+  display: flex;
+  width: 80px;
+  height: 80px;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--radius-base);
+  background: rgba(0, 0, 0, 0.171);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 2px solid rgb(22, 22, 22);
+  box-shadow:
+    0 8px 32px 0 rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+
+.dark-blur-icons::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.548),
+    rgba(0, 0, 0, 0.548)
+  );
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+.dark-blur-icons svg {
+  width: 45px;
+  height: 45px;
+  color: #fff;
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+  opacity: 0.9;
+}
+
+.dark-blur-icons:hover {
+  transform: scale3d(1.2, 1.2, 0.3);
+}
+
+a svg {
+  fill: white;
+}
+
+.home-background {
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  object-fit: cover;
+  position: fixed;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url("@/components/ui/Backgrounds/background-svgs/desktop.svg");
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .home-background {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    object-fit: cover;
+    position: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("@/components/ui/Backgrounds/background-svgs/mobile.svg");
+  }
+
+  .home-section-1 {
+    border-top-left-radius: 6rem;
+    border-top-right-radius: 6rem;
+  }
+
+  .profile-blur {
+    margin-top: -6rem;
+    margin-left: -1rem;
+    border-radius: 24px;
+    height: 260px;
+    width: 260px;
+  }
+
+  .image-profile-home {
+    border-radius: 20px;
+    width: 240px;
+    height: 240px;
+  }
+
+  .dev-bio {
+    margin-top: -8rem;
+    left: 37.5%;
+    width: 800px;
+    height: 400px;
+  }
+
+  .dev-bio p {
+    max-width: 90%;
+    font-size: 24px;
+  }
+
+  .section-1-container {
+    position: fixed;
+    top: 63%;
+    left: 4%;
+    transform: translate(-50%, -50%) scale(0.46);
+  }
+
+  .home-section-2 {
+    height: 50rem;
+  }
+
+  .rotating-bat-3d {
+    width: 120px;
+    height: 120px;
+    margin: -30rem auto 0;
+  }
+
+  .intro-text {
+    top: 53%;
+    font-size: 1.8rem;
+    width: 100%;
+  }
+
+  .intro-sub-text {
+    top: 58%;
+    font-size: 0.7rem;
+    width: 100%;
+  }
+
+  .context-tittle {
+    top: 54%;
+    left: 40%;
+    font-size: 2rem;
+  }
+  .context-sub-tittle {
+    top: 60%;
+    left: 22%;
+    font-size: 1.4rem;
+    max-width: 100%;
+  }
+
+  .dark-social {
+    width: 65px;
+    height: 65px;
+    top: 70%;
+  }
+  .dark-blur-icons {
+    border-radius: 18px;
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* ── Vertical Ipad ── */
+@media (min-width: 768px) and (max-width: 1280px) and (orientation: portrait) {
+  .intro-text {
+    width: 100%;
+    font-size: 3rem;
+  }
+  .intro-sub-text {
+    width: 100%;
+    font-size: 1.8rem;
+  }
+  .profile-blur {
+    top: 10%;
+    left: 30%;
+  }
+  .dev-bio {
+    top: 44%;
+    left: 6%;
+    width: 90%;
+  }
+}
+
+/* ── Horizontal Ipad ── */
+@media (min-width: 768px) and (max-width: 1280px) and (orientation: landscape) {
+  .profile-blur {
+    top: 30%;
+    margin-left: -2%;
+    width: 320px;
+    height: 320px;
+  }
+  .image-profile-home {
+    width: 280px;
+    height: 280px;
+  }
+  .dev-bio {
+    top: 30%;
+    left: 36%;
+    width: 60%;
+    height: 320px;
+  }
+  .dev-bio p {
+    max-width: 600px;
+  }
+}
+
+/* ── Macbook ── */
+@media (min-width: 1200px) {
+  .profile-blur {
+    top: 30%;
+    left: 8.5rem;
+    width: 385px;
+    height: 385px;
+  }
+
+  .image-profile-home {
+    width: 350px;
+    height: 350px;
+  }
+
+  .dev-bio {
+    top: 30%;
+    left: 37%;
+    width: 780px;
+    height: 385px;
+  }
+
+  .dev-bio p {
+    width: 600px;
+  }
+
+  .rotating-bat-3d {
+    width: 120px;
+    height: 120px;
+    margin: -32rem auto 0;
+  }
+
+  .context-tittle {
+    margin-top: 0.5rem;
+    font-size: 3.5rem;
+    left: 40.5rem;
+  }
+
+  .context-sub-tittle {
+    margin-top: -0.5rem;
+    font-size: 1.8rem;
+    left: 40%;
+  }
+
+  .dark-social {
+    top: 64%;
+    left: 50%;
+  }
+}
+
+/* ── Desktop Screens ── */
+@media (min-width: 1670px) {
+  .profile-blur {
+    width: 420px;
+    height: 420px;
+    top: 25%;
+    left: 11%;
+  }
+  .image-profile-home {
+    width: 380px;
+    height: 380px;
+  }
+
+  .dev-bio {
+    width: 1080px;
+    height: 420px;
+    top: 25%;
+    left: 34%;
+  }
+  .dev-bio p {
+    width: 1080px;
+    font-size: 1.5rem;
+  }
+
+  .rotating-bat-3d {
+    width: 120px;
+    height: 120px;
+    margin: -37rem auto 0;
+  }
+
+  .context-tittle {
+    margin-top: -0.5rem;
+    font-size: 4rem;
+    left: 46.4%;
+  }
+
+  .context-sub-tittle {
+    margin-top: -1rem;
+    font-size: 1.8rem;
+    left: 42.5%;
+  }
+
+  .dark-social {
+    top: 62%;
+    left: 50%;
+  }
+}
