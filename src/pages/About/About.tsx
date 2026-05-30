@@ -44,11 +44,6 @@ export default function About() {
           src={getAsset(images, assetPaths.lanyard)}
         />
       </header>
-      <section className="main-about">
-        <div className="my-core-values">
-          <h1 className="core-values-title">My Core Values</h1>
-        </div>
-      </section>
     </>
   );
 }
