@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "pnpm run build",
-    "deploy": "pnpm build && git add . && git commit -m \"deploy\" || true && git push"
+    "deploy": "git add . && git commit -m \"deploy\" || true && git push"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
