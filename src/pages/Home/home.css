@@ -243,7 +243,7 @@ a svg {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-image: url("@/components/ui/Backgrounds/background-svgs/desktop.svg");
+  background-image: url("@/components/ui/Backgrounds/background-avif/desktop.avif");
 }
 
 /* ── Mobile ── */
@@ -259,7 +259,7 @@ a svg {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: url("@/components/ui/Backgrounds/background-svgs/mobile.svg");
+    background-image: url("@/components/ui/Backgrounds/background-avif/mobile.avif");
   }
 
   .home-section-1 {

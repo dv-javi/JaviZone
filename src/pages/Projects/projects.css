@@ -4,7 +4,6 @@
   max-height: 100dvw;
   transform: translate(0%, -14%) scale(0.28);
 }
-
 /* ── Verrtical Ipad ── */
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .body-projects {

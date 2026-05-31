@@ -4,9 +4,8 @@ export const projects: Project[] = [
   {
     id: "NailsStudio",
     title: "Nails Studio",
-    description:
-      "A Nails Technician website to show designs and services.",
-    link: "https://nailstudio-grace.netlify.app",
+    description: "A Nails Technician website to show designs and services.",
+    link: "https://gb-nailsstudio.vercel.app",
     techStack: ["Website", "React", "Vite"],
     colors: ["#8d1b34ff", "#130A0D", "#130A0D"],
   },

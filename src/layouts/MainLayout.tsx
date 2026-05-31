@@ -16,7 +16,7 @@ function ScrollToTop() {
   return null;
 }
 
-function GalaxyBackground() {
+function SpaceBackground() {
   return (
     <div className="bg-space">
       <Galaxy
@@ -38,6 +38,8 @@ function GalaxyBackground() {
 }
 
 export default function MainLayout() {
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
   const lenisRef = useLenis();
 
   useEffect(() => {
@@ -48,7 +50,7 @@ export default function MainLayout() {
     <>
       <Navbar />
       <ScrollToTop />
-      <GalaxyBackground />
+      {!isHome && <SpaceBackground />}
       <Outlet />
       <FeedbackModal lenisRef={lenisRef} />
     </>

@@ -1,7 +1,7 @@
 .title-info {
   display: grid;
   font-size: 55px;
-  margin-top: 4rem;
+  margin-top: 8rem;
   margin-bottom: 4rem;
   font-family: nippo;
   text-align: center;
@@ -10,104 +10,28 @@
   justify-content: center;
 }
 
-.biker-info {
+.main-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
-  height: 51rem;
-  display: grid;
-  grid: "biker-title biker-title biker-title" auto "biker-description biker-description icon-bike" auto "bike-cards bike-cards bike-cards" 1fr / 1fr 1fr 1fr;
-  gap: 8px;
-  color: var(--clr-light);
-  backdrop-filter: var(--blur);
-  background: var(--clr-bg-soft);
-  border-radius: var(--radius-base);
-  -webkit-backdrop-filter: var(--blur);
-  border: 0.1vw solid var(--clr-border);
+  gap: 2rem;
+  padding-inline: 0.5rem;
+  box-sizing: border-box;
 }
 
-.biker-title {
-  font-size: 28px;
-  margin-top: 2.5rem;
-  text-align: left;
-  margin-left: 2.5rem;
-  font-family: nippo;
-  grid-area: biker-title;
-  color: var(--clr-light);
-}
-
-.biker-description {
-  margin-top: 0;
-  text-align: left;
-  margin-bottom: 10px;
-  font-size: 20px;
-  grid-area: biker-description;
-  line-height: 1.45;
-  margin-left: 2.5rem;
-  font-family: nippo;
-  color: var(--clr-subtle);
-}
-
-.icon-bike {
-  grid-area: icon-bike;
-  width: 70px;
-  margin-top: -3rem;
-  margin-left: -5.8rem;
-}
-
-.bike-cards {
-  width: 100%;
-  display: grid;
-  margin-top: 30px;
-  margin-left: 1.6rem;
-  grid: "bk1 bk2 bk3" 0.5fr "bk1 bk4 bk3" auto / auto auto auto;
-  gap: 10px;
-}
-
-.lateral-bike-card {
-  width: 358px;
-  overflow: hidden;
-  object-fit: cover;
-  aspect-ratio: 9 / 14;
-  color: var(--clr-light);
-  backdrop-filter: var(--blur);
-  background: var(--clr-bg-soft);
-  border-radius: var(--radius-base);
-  -webkit-backdrop-filter: var(--blur);
-  border: 0.1vw solid var(--clr-border);
-}
-
-.center-bike-card {
-  width: 358px;
-  height: 272px;
-  overflow: hidden;
-  object-fit: cover;
-  aspect-ratio: 9 / 14;
-  grid-area: bike-card4;
-  color: var(--clr-light);
-  backdrop-filter: var(--blur);
-  background: var(--clr-bg-soft);
-  border-radius: var(--radius-base);
-  -webkit-backdrop-filter: var(--blur);
-  border: 0.1vw solid var(--clr-border);
-}
-
-.bk1 {
-  grid-area: bk1;
-}
-
-.bk2 {
-  grid-area: bk2;
-}
-
-.bk3 {
-  grid-area: bk3;
-}
-
-.bk4 {
-  grid-area: bk4;
-}
-
-.bike-image-card {
-  display: block;
-  max-width: 100%;
-  height: auto;
+@media (max-width: 767px) {
+  .main-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-inline: 0.5rem;
+    box-sizing: border-box;
+  }
+  .title-info {
+    font-size: 22px;
+    margin-top: 7rem;
+    margin-bottom: 2rem;
+  }
 }

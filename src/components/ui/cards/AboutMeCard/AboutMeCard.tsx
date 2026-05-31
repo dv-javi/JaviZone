@@ -78,11 +78,9 @@ export default function AboutMeCard({
             {callToAction}
             <br />
             <svg
-              className="arrow w-[48px] h-[48px] text-gray-800 dark:text-white"
+              className="arrow"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
               fill="currentColor"
               viewBox="0 0 24 24"
             >
@@ -93,8 +91,8 @@ export default function AboutMeCard({
               />
             </svg>
           </p>
-          <a href={logoHref} target="_blank" rel="noreferrer">
-            <svg className="logo">{logo}</svg>
+          <a className="logo-link" href={logoHref} target="_blank" rel="noreferrer">
+            <div className="logo">{logo}</div>
           </a>
         </div>
       </section>
