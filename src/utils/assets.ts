@@ -17,7 +17,7 @@ const PROJECTS_MINIATURES_BASE = "Images/CardsImages/Projects/Miniatures";
 export const assetPaths = {
   aboutMeImage: (name: string, ext: "avif" | "svg") =>
     `${ABOUT_ME_BASE}/${name}.${ext}`,
-  projectIcon: (id: string) => `${PROJECTS_ICONS_BASE}/${id}Icon.svg`,
+  projectIcon: (id: string) => `${PROJECTS_ICONS_BASE}/${id}Icon.avif`,
   projectMiniature: (id: string) => `${PROJECTS_MINIATURES_BASE}/${id}.avif`,
   profileImage: "Images/image-profile.avif",
   lanyard: "Images/lanyard.avif",

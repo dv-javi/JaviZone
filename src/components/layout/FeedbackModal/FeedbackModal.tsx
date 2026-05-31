@@ -67,8 +67,8 @@ export default function FeedbackModal({ lenisRef }: FeedbackModalProps) {
             <>
               <img
                 className="tiny-picture"
-                alt=""
-                  src={getAsset(images, assetPaths.profileImage)}
+                alt="Portrait of Javier Prado inviting feedback"
+                src={getAsset(images, assetPaths.profileImage)}
               />
               <div className="image-title">Any insights?</div>
 
@@ -154,7 +154,7 @@ export default function FeedbackModal({ lenisRef }: FeedbackModalProps) {
               <div className="form-submit-btn sent">
                 <img
                   className="sent-picture"
-                  alt=""
+                  alt="Illustration of a developer at a Mac after sending feedback"
                   src={getAsset(images, assetPaths.developerMac)}
                 />
               </div>

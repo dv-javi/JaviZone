@@ -91,7 +91,12 @@ export default function AboutMeCard({
               />
             </svg>
           </p>
-          <a className="logo-link" href={logoHref} target="_blank" rel="noreferrer">
+          <a
+            className="logo-link"
+            href={logoHref}
+            target="_blank"
+            rel="noreferrer"
+          >
             <div className="logo">{logo}</div>
           </a>
         </div>

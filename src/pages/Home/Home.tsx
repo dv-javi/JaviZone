@@ -1,9 +1,15 @@
-import { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
-import PixelBlast from "@/components/ui/Backgrounds/Blast/PixelBlast";
-import DecryptedText from "@/components/ui/TextAnimations/DecryptedText/DecryptedText";
 import { assetPaths, getAsset, type ImageModuleMap } from "@/utils/assets";
+import { motion, useInView } from "motion/react";
+import { useRef, useState } from "react";
+import { lazy, Suspense } from "react";
 import "./home.css";
+
+const DecryptedText = lazy(
+  () => import("@/components/ui/TextAnimations/DecryptedText/DecryptedText"),
+);
+const PixelBlast = lazy(
+  () => import("@/components/ui/Backgrounds/Blast/PixelBlast"),
+);
 
 const images = import.meta.glob(
   "@/assets/Images/*.{png,webp,avif,jpg,jpeg,gif,svg}",
@@ -137,6 +143,7 @@ export default function Home() {
             <img
               className="image-profile-home"
               src={getAsset(images, assetPaths.profileImage)}
+              alt="Portrait of Javier Prado, software developer and portfolio owner"
             />
           </div>
 
@@ -189,21 +196,23 @@ export default function Home() {
         </section>
 
         <div className="home-section-2" ref={section1Ref}>
-          <PixelBlast
-            variant="circle"
-            pixelSize={3}
-            color="#82868659"
-            patternScale={3}
-            patternDensity={1}
-            pixelSizeJitter={0.5}
-            enableRipples
-            rippleSpeed={0.4}
-            rippleThickness={0.12}
-            rippleIntensityScale={1}
-            speed={0.6}
-            edgeFade={0.25}
-            transparent
-          />
+          <Suspense fallback={null}>
+            <PixelBlast
+              variant="circle"
+              pixelSize={3}
+              color="#82868659"
+              patternScale={3}
+              patternDensity={1}
+              pixelSizeJitter={0.5}
+              enableRipples
+              rippleSpeed={0.4}
+              rippleThickness={0.12}
+              rippleIntensityScale={1}
+              speed={0.6}
+              edgeFade={0.25}
+              transparent
+            />
+          </Suspense>
 
           <div className="section-2-container">
             <h2

@@ -16,7 +16,7 @@ export default function Navbar() {
             data-aos="fade-down"
             data-aos-duration="1800"
             className="portfolio-logo"
-            alt="Javier Prado"
+            alt="JaviZone — Javier Prado portfolio logo"
             src={getAsset(images, assetPaths.navLogo)}
           />
         </NavLink>
@@ -27,7 +27,7 @@ export default function Navbar() {
             data-aos="fade-down"
             data-aos-duration="3000"
             className="outlook-logo"
-            alt="Email"
+            alt="Email Javier Prado at dev-jp@outlook.com"
             src={getAsset(images, assetPaths.navOutlook)}
           />
         </a>

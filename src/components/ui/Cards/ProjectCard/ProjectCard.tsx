@@ -41,7 +41,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           <span className="project-description">{project.description}</span>
           <img
             className="project-icon"
-            alt=""
+            alt={`${project.title} project logo`}
             src={getAsset(images, assetPaths.projectIcon(project.id))}
           />
           <ul className="tech-stack">
@@ -53,7 +53,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
 
         <img
           className="project-image"
-          alt=""
+          alt={`${project.title} website preview — ${project.description}`}
           src={getAsset(images, assetPaths.projectMiniature(project.id))}
         />
       </section>

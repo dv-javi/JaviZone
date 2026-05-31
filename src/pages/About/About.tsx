@@ -40,7 +40,7 @@ export default function About() {
           data-aos="fade-up"
           data-aos-duration="1200"
           className="lanyard"
-          alt=""
+          alt="Javier Prado wearing a conference lanyard with name badge"
           src={getAsset(images, assetPaths.lanyard)}
         />
         {/* <section className="main-about">
