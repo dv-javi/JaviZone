@@ -14,13 +14,17 @@ export default async function handler(
   try {
     const result = await handleSendEmailRequest(req.body);
 
-    if (!result.ok) {
-      const status = "status" in result ? result.status : 500;
-
-      return res.status(status).json({
+    if (result.ok === false) {
+      res.status(result.status).json({
         error: result.error,
       });
+      return;
     }
+
+    res.status(200).json({
+      success: true,
+      id: result.data.id,
+    });
 
     res.status(200).json({ success: true, id: result.data.id });
   } catch (error) {
