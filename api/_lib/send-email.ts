@@ -12,6 +12,49 @@ export type SendEmailResult =
   | { ok: false; status: number; error: string };
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const RESEND_FROM_DISPLAY_NAME = "JaviZone";
+
+export function isSendEmailFailure(
+  result: SendEmailResult,
+): result is Extract<SendEmailResult, { ok: false }> {
+  return result.ok === false;
+}
+
+export function isSendEmailSuccess(
+  result: SendEmailResult,
+): result is Extract<SendEmailResult, { ok: true }> {
+  return result.ok === true;
+}
+
+/** Parses Vercel/dev request bodies (object, JSON string, or Buffer). */
+export function parseJsonRequestBody(raw: unknown): unknown | null {
+  if (raw === undefined || raw === null) {
+    return {};
+  }
+
+  if (typeof raw === "string") {
+    const trimmed = raw.trim();
+    if (trimmed === "") {
+      return {};
+    }
+
+    try {
+      return JSON.parse(trimmed) as unknown;
+    } catch {
+      return null;
+    }
+  }
+
+  if (Buffer.isBuffer(raw)) {
+    return parseJsonRequestBody(raw.toString("utf8"));
+  }
+
+  if (typeof raw === "object") {
+    return raw;
+  }
+
+  return null;
+}
 
 function escapeHtml(value: string): string {
   return value
@@ -254,10 +297,46 @@ function buildEmailHtml(payload: ContactPayload): string {
 `.trim();
 }
 
+function readBareEmailEnv(
+  value: string | undefined,
+  envName: string,
+): { ok: true; email: string } | { ok: false; reason: string } {
+  const trimmed = value?.trim() ?? "";
+
+  if (!trimmed) {
+    return { ok: false, reason: `${envName} is not configured.` };
+  }
+
+  if (trimmed.includes("<") || trimmed.includes(">")) {
+    return {
+      ok: false,
+      reason: `${envName} must be a bare email (no display name or angle brackets).`,
+    };
+  }
+
+  if (!EMAIL_PATTERN.test(trimmed)) {
+    return {
+      ok: false,
+      reason: `${envName} is not a valid email address.`,
+    };
+  }
+
+  return { ok: true, email: trimmed };
+}
+
+function buildResendFromAddress(bareEmail: string): string {
+  return `${RESEND_FROM_DISPLAY_NAME} <${bareEmail}>`;
+}
+
+function buildOutboundSubject(subject: string): string {
+  return `Portfolio Feedback: ${subject}`;
+}
+
 export function validateContactPayload(body: unknown): ContactPayload | null {
   if (!body || typeof body !== "object") return null;
 
-  const { name, email, subject, message } = body as Record<string, unknown>;
+  const record = body as Record<string, unknown>;
+  const { name, email, subject, message } = record;
 
   if (typeof name !== "string" || typeof message !== "string") return null;
   if (typeof email !== "string" || typeof subject !== "string") return null;
@@ -285,8 +364,7 @@ export function validateContactPayload(body: unknown): ContactPayload | null {
 export async function sendContactEmail(
   payload: ContactPayload,
 ): Promise<SendEmailResult> {
-  const apiKey = process.env.RESEND_API_KEY;
-  const contactEmail = process.env.CONTACT_EMAIL;
+  const apiKey = process.env.RESEND_API_KEY?.trim();
 
   if (!apiKey) {
     return {
@@ -296,7 +374,13 @@ export async function sendContactEmail(
     };
   }
 
-  if (!contactEmail) {
+  const contactEmailResult = readBareEmailEnv(
+    process.env.CONTACT_EMAIL,
+    "CONTACT_EMAIL",
+  );
+
+  if (contactEmailResult.ok === false) {
+    console.error(contactEmailResult.reason);
     return {
       ok: false,
       status: 500,
@@ -304,32 +388,37 @@ export async function sendContactEmail(
     };
   }
 
-  const fromEmail = process.env.RESEND_FROM_EMAIL;
+  const fromEmailResult = readBareEmailEnv(
+    process.env.RESEND_FROM_EMAIL,
+    "RESEND_FROM_EMAIL",
+  );
 
-  if (!fromEmail) {
+  if (fromEmailResult.ok === false) {
+    console.error(fromEmailResult.reason);
     return {
       ok: false,
       status: 500,
-      error: "RESEND_FROM_EMAIL is not configured.",
+      error: "Email service is not configured.",
     };
   }
 
   const resend = new Resend(apiKey);
+  const from = buildResendFromAddress(fromEmailResult.email);
   const replyTo =
     payload.email && EMAIL_PATTERN.test(payload.email)
       ? payload.email
       : undefined;
 
   const { data, error } = await resend.emails.send({
-    from: fromEmail,
-    to: contactEmail,
-    subject: "Portfolio Contact Form",
+    from,
+    to: contactEmailResult.email,
+    subject: buildOutboundSubject(payload.subject),
     html: buildEmailHtml(payload),
     ...(replyTo ? { replyTo } : {}),
   });
 
   if (error) {
-    console.error("Resend error:", error);
+    console.error("Resend error:", error.name, error.message);
     return {
       ok: false,
       status: 502,

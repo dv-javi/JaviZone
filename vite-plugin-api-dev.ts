@@ -1,6 +1,9 @@
 import type { Plugin } from "vite";
 import { loadEnv } from "vite";
-import { handleSendEmailRequest } from "./api/_lib/send-email";
+import {
+  handleSendEmailRequest,
+  isSendEmailFailure,
+} from "./api/_lib/send-email";
 
 function readJsonBody(req: import("http").IncomingMessage): Promise<unknown> {
   return new Promise((resolve, reject) => {
@@ -50,7 +53,7 @@ export function apiDevPlugin(): Plugin {
 
           res.setHeader("Content-Type", "application/json");
 
-          if (!result.ok) {
+          if (isSendEmailFailure(result)) {
             res.statusCode = result.status;
             res.end(JSON.stringify({ error: result.error }));
             return;
