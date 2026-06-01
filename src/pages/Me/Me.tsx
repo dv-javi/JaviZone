@@ -5,6 +5,7 @@ export default function Me() {
   return (
     <>
       <title>Javier Prado</title>
+      <div className="general-background" />
       <main className="main-info">
         <h1 className="title-info">BEYOND THE PIXELES, I’M..</h1>
 

@@ -6,12 +6,12 @@
 }
 
 @font-face {
-  font-family: "Titles";
+  font-family: "titles";
   src: url(./assets/Fonts/PlayfairDisplay.ttf);
 }
 
 @font-face {
-  font-family: "Big-Titles";
+  font-family: "big-itles";
   src: url(./assets/fonts/BlackpastDEMO.ttf);
 }
 
@@ -24,20 +24,13 @@
 * {
   margin: 0;
   padding: 0;
-
   box-sizing: border-box;
-}
-
-html,
-body,
-#root {
-  background: #00000000;
-  min-height: 100%;
 }
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   color-scheme: light dark;
+  background-color: #0000;
   --clr-light: #ffffff;
   --clr-dark: #d1d1d1;
   --clr-subtle: #cecece;
@@ -67,19 +60,4 @@ body,
 html {
   scrollbar-width: none;
   scrollbar-color: transparent transparent;
-}
-
-.background-pixel {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-
-  will-change: transform;
-  transform: translateZ(0);
-}
-
-.background-pixel canvas {
-  width: 100% !important;
-  height: 100% !important;
 }

@@ -18,7 +18,9 @@ dist-ssr
 .idea
 .DS_Store
 **/.DS_Store
-.env.example
+.env
+.env.local
+.env.*.local
 # Apple macOS garbage
 ._*
 **/.*

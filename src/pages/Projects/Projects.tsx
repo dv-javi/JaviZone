@@ -6,6 +6,7 @@ export default function Projects() {
   return (
     <>
       <title>Javier Prado</title>
+      <div className="general-background" />
       <div className="body-projects">
         <div className="project-efect" />
         <main className="projects-container">
