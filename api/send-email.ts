@@ -4,7 +4,7 @@ import { handleSendEmailRequest } from "./_lib/send-email";
 export default async function handler(
   req: VercelRequest,
   res: VercelResponse,
-): Promise<void> {
+): Promise<VercelResponse | void> {
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
     res.status(405).json({ error: "Method not allowed." });
@@ -15,8 +15,11 @@ export default async function handler(
     const result = await handleSendEmailRequest(req.body);
 
     if (!result.ok) {
-      res.status(result.status).json({ error: result.error });
-      return;
+      const status = "status" in result ? result.status : 500;
+
+      return res.status(status).json({
+        error: result.error,
+      });
     }
 
     res.status(200).json({ success: true, id: result.data.id });
