@@ -26,7 +26,6 @@ export function isSendEmailSuccess(
   return result.ok === true;
 }
 
-/** Parses Vercel/dev request bodies (object, JSON string, or Buffer). */
 export function parseJsonRequestBody(raw: unknown): unknown | null {
   if (raw === undefined || raw === null) {
     return {};
@@ -361,12 +360,15 @@ export function validateContactPayload(body: unknown): ContactPayload | null {
   };
 }
 
+// ... TODO igual arriba (sin cambios)
+
 export async function sendContactEmail(
   payload: ContactPayload,
 ): Promise<SendEmailResult> {
   const apiKey = process.env.RESEND_API_KEY?.trim();
 
   if (!apiKey) {
+    console.error("[RESEND] Missing RESEND_API_KEY in environment variables");
     return {
       ok: false,
       status: 500,
@@ -380,7 +382,7 @@ export async function sendContactEmail(
   );
 
   if (contactEmailResult.ok === false) {
-    console.error(contactEmailResult.reason);
+    console.error("[RESEND] CONTACT_EMAIL error:", contactEmailResult.reason);
     return {
       ok: false,
       status: 500,
@@ -394,7 +396,7 @@ export async function sendContactEmail(
   );
 
   if (fromEmailResult.ok === false) {
-    console.error(fromEmailResult.reason);
+    console.error("[RESEND] RESEND_FROM_EMAIL error:", fromEmailResult.reason);
     return {
       ok: false,
       status: 500,
@@ -403,7 +405,9 @@ export async function sendContactEmail(
   }
 
   const resend = new Resend(apiKey);
+
   const from = buildResendFromAddress(fromEmailResult.email);
+
   const replyTo =
     payload.email && EMAIL_PATTERN.test(payload.email)
       ? payload.email
@@ -418,7 +422,12 @@ export async function sendContactEmail(
   });
 
   if (error) {
-    console.error("Resend error:", error.name, error.message);
+    console.error("[RESEND] API ERROR:", {
+      name: error?.name,
+      message: error?.message,
+      full: error,
+    });
+
     return {
       ok: false,
       status: 502,
@@ -427,12 +436,18 @@ export async function sendContactEmail(
   }
 
   if (!data?.id) {
+    console.error("[RESEND] No ID returned from Resend response:", {
+      data,
+    });
+
     return {
       ok: false,
       status: 502,
       error: "Failed to send email. Please try again later.",
     };
   }
+
+  console.log("[RESEND] Email sent successfully:", data.id);
 
   return { ok: true, data: { id: data.id } };
 }
