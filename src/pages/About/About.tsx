@@ -38,9 +38,9 @@ const contactLinks = [
   },
   {
     label: "LinkedIn",
-    display: "linkedin.com/in/javierprado",
+    display: "linkedin.com/in/devjavi",
     hint: "Let's connect and grow our network.",
-    href: "https://www.linkedin.com/in/javierprado",
+    href: "https://www.linkedin.com/in/devjavi",
     external: true,
   },
   {
@@ -56,11 +56,11 @@ function EmailIcon() {
   return (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
       <path
-        d="M4 6h16v12H4V6zm0 0l8 6 8-6"
         stroke="currentColor"
-        strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
+        strokeWidth="2"
+        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
       />
     </svg>
   );
@@ -69,13 +69,17 @@ function EmailIcon() {
 function LinkedInIcon() {
   return (
     <svg
+      xmlns="http://www.w3.org/2000/svg"
       width="20"
       height="20"
-      viewBox="0 0 24 24"
+      viewBox="0 0 666 680"
       fill="currentColor"
       aria-hidden
     >
-      <path d="M6.5 8.5h3v11h-3v-11zm1.5-4.5a1.75 1.75 0 110 3.5 1.75 1.75 0 010-3.5zM10 8.5h2.9v1.5h.04c.4-.75 1.38-1.55 2.84-1.55 3.04 0 3.6 2 3.6 4.6v6.45h-3.1v-5.72c0-1.36-.03-3.1-1.89-3.1-1.94 0-2.24 1.52-2.24 3.08v5.74H10V8.5z" />
+      <path
+        fill="#ffffff"
+        d="M0 98v498c0 47 37 84 84 84h498c23 0 45-11 59-25c15-15 25-34 25-59V98c0-47-37-84-84-84H84c-25 0-44 10-59 25C11 53 0 75 0 98zm90 66c0-32 26-60 58-60c33 0 60 28 60 60c0 33-27 59-60 59c-32 0-58-26-58-59zm161 411V270c0-7 7-13 12-13h85c12 0 12 14 12 23c24-24 55-30 87-30c78 0 128 37 128 119v206c0 7-6 13-12 13h-88c-7 0-12-7-12-13V389c0-31-9-48-44-48c-44 0-55 29-55 68v166c0 7-7 13-14 13h-87c-5 0-12-7-12-13zm-159 0V270c0-7 7-13 12-13h87c8 0 13 5 13 13v305c0 7-6 13-13 13h-87c-6 0-12-7-12-13z"
+      />
     </svg>
   );
 }

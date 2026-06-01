@@ -111,6 +111,8 @@
 .main-about {
   padding-top: 1rem;
   align-items: start;
+  justify-items: center;
+  justify-content: center;
   display: grid;
   grid:
     "my-core-values" auto
@@ -121,7 +123,7 @@
 
 .my-core-values {
   grid-area: my-core-values;
-  margin: 0 0 0 1rem;
+  margin-inline: auto;
   width: 22.5rem;
   height: 30rem;
   padding: 20px;
@@ -170,7 +172,7 @@
 }
 
 .info-container {
-  margin: 0 0 0 1rem;
+  margin-inline: auto;
   width: 22.5rem;
   height: 38rem;
   padding: 20px;
@@ -507,11 +509,11 @@
     width: 688px;
     height: 30rem;
     padding: 20px;
-    margin-left: 2.5rem;
+    margin-inline: auto;
   }
 
   .info-container {
-    margin-left: 2.5rem;
+    margin-inline: auto;
     width: 688px;
     height: 30rem;
     padding: 20px;
@@ -548,20 +550,23 @@
   }
   .main-about {
     padding-top: 1rem;
+    justify-items: center;
+    justify-content: center;
     grid:
       "my-core-values contact-info" auto
-      / 1fr 1fr;
+      / auto auto;
+    gap: 10px;
   }
 
   .my-core-values {
     width: 380px;
     height: 30rem;
     padding: 20px;
-    margin-left: 4rem;
+    margin-inline: auto;
   }
 
   .info-container {
-    margin-right: 4rem;
+    margin-inline: auto;
     width: 35rem;
     height: 30rem;
     padding: 20px;
@@ -607,23 +612,25 @@
 
   .main-about {
     padding-top: 1rem;
+    margin-left: -0.5rem;
+    justify-items: center;
+    justify-content: center;
     grid:
       "my-core-values contact-info" auto
-      / 1fr 1fr;
+      / auto auto;
+    gap: 8px;
   }
 
   .my-core-values {
-    width: 398px;
+    width: 400px;
     height: 30rem;
-    padding: 20px;
-    margin-left: 3rem;
+    margin-inline: auto;
   }
 
   .info-container {
-    margin-right: 4rem;
-    width: 48rem;
+    width: 764px;
     height: 30rem;
-    padding: 20px;
+    margin-inline: auto;
   }
 }
 
@@ -658,22 +665,24 @@
 
   .main-about {
     padding-top: 1rem;
+    margin-left: 0.5rem;
+    justify-items: center;
+    justify-content: center;
     grid:
       "my-core-values contact-info" auto
-      / 1fr 1fr;
+      / auto auto;
+    gap: 8px;
   }
 
   .my-core-values {
-    width: 450px;
+    width: 480px;
     height: 30rem;
-    padding: 20px;
-    margin-left: 0rem;
+    margin-inline: auto;
   }
 
   .info-container {
-    margin-right: 0rem;
-    width: 52rem;
+    width: 50rem;
     height: 30rem;
-    padding: 20px;
+    margin-inline: auto;
   }
 }

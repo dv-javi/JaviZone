@@ -2,7 +2,6 @@ import { Resend } from "resend";
 
 export type ContactPayload = {
   name: string;
-  /** Optional — empty string when not provided. */
   email: string;
   subject: string;
   message: string;
