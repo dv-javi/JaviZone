@@ -1,5 +1,5 @@
-import { bioSections } from "@/data/bioSections";
 import { assetPaths, getAsset, type ImageModuleMap } from "@/utils/assets";
+import { bioSections } from "@/data/bioSections";
 import "./about.css";
 
 const images = import.meta.glob(

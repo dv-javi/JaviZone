@@ -31,7 +31,7 @@
 html,
 body,
 #root {
-  background: #000;
+  background: #00000000;
   min-height: 100%;
 }
 
@@ -67,4 +67,19 @@ body,
 html {
   scrollbar-width: none;
   scrollbar-color: transparent transparent;
+}
+
+.background-pixel {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.background-pixel canvas {
+  width: 100% !important;
+  height: 100% !important;
 }
