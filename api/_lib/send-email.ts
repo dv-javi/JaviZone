@@ -65,7 +65,7 @@ function infoCard(label: string, value: string): string {
 
 function buildEmailHtml(payload: ContactPayload): string {
   const { name, email, subject, message } = payload;
-  const trimmedEmail = email.trim();
+  const trimmedEmail = (email ?? "").trim();
   const hasValidEmail =
     trimmedEmail.length > 0 && EMAIL_PATTERN.test(trimmedEmail);
   const displayEmail = hasValidEmail ? trimmedEmail : "Not provided";
