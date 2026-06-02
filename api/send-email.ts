@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { Resend } from "resend";
-import { EmailTemplate } from "../src/emails/emailTemplate.tsx";
+import { EmailTemplate } from "../src/emails/emailTemplate";
 
 const RATE_LIMIT_MAX = 5;
 const RATE_LIMIT_WINDOW_MS = 60_000;
@@ -23,20 +23,20 @@ type ServerEnv = {
 
 function getClientIp(req: VercelRequest): string {
   const forwarded = req.headers["x-forwarded-for"];
-  if (typeof forwarded === "string" && forwarded.length > 0) {
+  if (typeof forwarded === "string") {
     return forwarded.split(",")[0]?.trim() ?? "unknown";
   }
-  if (Array.isArray(forwarded) && forwarded[0]) {
-    return forwarded[0].split(",")[0]?.trim() ?? "unknown";
+  if (Array.isArray(forwarded)) {
+    return forwarded[0]?.split(",")[0]?.trim() ?? "unknown";
   }
   return req.socket?.remoteAddress ?? "unknown";
 }
 
 function isRateLimited(ip: string): boolean {
   const now = Date.now();
-  const recent = (rateLimitStore.get(ip) ?? []).filter(
-    (timestamp) => now - timestamp < RATE_LIMIT_WINDOW_MS,
-  );
+  const windowStart = now - RATE_LIMIT_WINDOW_MS;
+
+  const recent = (rateLimitStore.get(ip) ?? []).filter((t) => t > windowStart);
 
   if (recent.length >= RATE_LIMIT_MAX) {
     rateLimitStore.set(ip, recent);
@@ -45,6 +45,7 @@ function isRateLimited(ip: string): boolean {
 
   recent.push(now);
   rateLimitStore.set(ip, recent);
+
   return false;
 }
 
@@ -61,9 +62,7 @@ function getServerEnv(): ServerEnv | null {
 }
 
 function parseBody(req: VercelRequest): FeedbackBody | null {
-  if (!req.body || typeof req.body !== "object") {
-    return null;
-  }
+  if (!req.body) return null;
 
   const { name, email, message } = req.body as Record<string, unknown>;
 
@@ -79,41 +78,37 @@ function parseBody(req: VercelRequest): FeedbackBody | null {
 }
 
 function validateFeedback(body: FeedbackBody): string | null {
-  const trimmedName = body.name.trim();
-  const trimmedEmail = body.email.trim();
-  const trimmedMessage = body.message.trim();
+  const name = body.name.trim();
+  const email = body.email.trim();
+  const message = body.message.trim();
 
-  if (trimmedName.length < 2 || trimmedName.length > 60) {
+  if (name.length < 2 || name.length > 60) {
     return "Name must be between 2 and 60 characters.";
   }
 
-  if (!/^[A-Za-zÀ-ÿ\s]+$/.test(trimmedName)) {
+  if (!/^[A-Za-zÀ-ÿ\s]+$/.test(name)) {
     return "Name contains invalid characters.";
   }
 
-  if (trimmedEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return "Please provide a valid email address.";
   }
 
-  if (trimmedMessage.length < 10 || trimmedMessage.length > 500) {
+  if (message.length < 10 || message.length > 500) {
     return "Message must be between 10 and 500 characters.";
   }
 
   return null;
 }
-
-export default async function handler(
-  req: VercelRequest,
-  res: VercelResponse,
-): Promise<void> {
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "POST") {
-    res.setHeader("Allow", "POST");
     res.status(405).json({ error: "Method not allowed" });
     return;
   }
 
-  const clientIp = getClientIp(req);
-  if (isRateLimited(clientIp)) {
+  const ip = getClientIp(req);
+
+  if (isRateLimited(ip)) {
     res.status(429).json({ error: RATE_LIMIT_MESSAGE });
     return;
   }
@@ -137,14 +132,13 @@ export default async function handler(
   }
 
   const resend = new Resend(env.resendApiKey);
-  const fromAddress = `JaviZone Feedback <feedback@${env.domain}>`;
 
   const { error } = await resend.emails.send({
-    from: fromAddress,
+    from: `JaviZone Feedback <feedback@${env.domain}>`,
     to: [env.contactEmail],
-    replyTo: body.email.trim() || undefined,
+    replyTo: body.email.trim(),
     subject: "Portfolio Feedback",
-    react: EmailTemplate({
+    html: EmailTemplate({
       name: body.name.trim(),
       email: body.email.trim(),
       message: body.message.trim(),
@@ -152,7 +146,7 @@ export default async function handler(
   });
 
   if (error) {
-    console.error("Resend send failed:", error);
+    console.error("Resend error:", error);
     res.status(500).json({ error: "Failed to send email" });
     return;
   }
