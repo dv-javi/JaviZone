@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import { Resend } from "resend";
-import { EmailTemplate } from "../src/emails/emailTemplate";
+import { EmailTemplate } from "../src/emails/emailTemplate.tsx";
 
 const RATE_LIMIT_MAX = 5;
 const RATE_LIMIT_WINDOW_MS = 60_000;
