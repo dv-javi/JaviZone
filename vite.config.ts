@@ -1,10 +1,9 @@
 import { defineConfig } from "vite";
 import path from "path";
 import react from "@vitejs/plugin-react-swc";
-import { apiDevPlugin } from "./vite-plugin-api-dev";
 
 export default defineConfig({
-  plugins: [react(), apiDevPlugin()],
+  plugins: [react()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

@@ -1,11 +1,6 @@
 import { useRef, useState } from "react";
 import type { RefObject } from "react";
 import type Lenis from "lenis";
-import {
-  buildFeedbackPayload,
-  sendFeedbackForm,
-  validateOptionalEmail,
-} from "@/services/emailService";
 import { assetPaths, getAsset, type ImageModuleMap } from "@/utils/assets";
 import { useScrollLock } from "@/hooks/useScrollLock";
 import "./feedback-modal.css";
@@ -19,14 +14,33 @@ type FeedbackModalProps = {
   lenisRef?: RefObject<Lenis | null>;
 };
 
+type FeedbackPayload = {
+  name: string;
+  email: string;
+  message: string;
+};
+
+const GENERIC_ERROR_MESSAGE =
+  "An error has occurred. Please try again.";
+const RATE_LIMIT_ERROR_MESSAGE =
+  "Too many requests. Please wait a minute before trying again.";
+
 export default function FeedbackModal({ lenisRef }: FeedbackModalProps) {
   const form = useRef<HTMLFormElement | null>(null);
+
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [emailError, setEmailError] = useState<string | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   useScrollLock(showModal, lenisRef);
+
+  // ✅ optional email validation
+  const validateOptionalEmail = (email: string) => {
+    if (!email) return true;
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
 
   const syncEmailValidation = (input: HTMLInputElement) => {
     if (!validateOptionalEmail(input.value)) {
@@ -39,6 +53,37 @@ export default function FeedbackModal({ lenisRef }: FeedbackModalProps) {
     input.setCustomValidity("");
     setEmailError(null);
     return true;
+  };
+
+  // ✅ build payload
+  const buildFeedbackPayload = (form: HTMLFormElement): FeedbackPayload => {
+    const formData = new FormData(form);
+
+    return {
+      name: String(formData.get("user_name") || ""),
+      email: String(formData.get("user_email") || ""),
+      message: String(formData.get("message") || ""),
+    };
+  };
+
+  const sendFeedbackForm = async (payload: FeedbackPayload) => {
+    const res = await fetch(import.meta.env.VITE_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (res.status === 429) {
+      throw new Error(RATE_LIMIT_ERROR_MESSAGE);
+    }
+
+    if (!res.ok) {
+      throw new Error(GENERIC_ERROR_MESSAGE);
+    }
+
+    return res.json() as Promise<{ success: true }>;
   };
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
@@ -57,15 +102,24 @@ export default function FeedbackModal({ lenisRef }: FeedbackModalProps) {
 
     if (!form.current.reportValidity()) return;
 
+    setSubmitError(null);
     setIsSending(true);
-    setIsSubmitted(true);
 
     sendFeedbackForm(buildFeedbackPayload(form.current))
-      .then(() => setIsSending(false))
-      .catch((error) => {
+      .then(() => {
+        setIsSending(false);
+        setIsSubmitted(true);
+      })
+      .catch((error: unknown) => {
         console.error("Feedback send failed:", error);
         setIsSending(false);
-        setIsSubmitted(false);
+        const message =
+          error instanceof Error ? error.message : GENERIC_ERROR_MESSAGE;
+        setSubmitError(
+          message === RATE_LIMIT_ERROR_MESSAGE
+            ? RATE_LIMIT_ERROR_MESSAGE
+            : GENERIC_ERROR_MESSAGE,
+        );
       });
   };
 
@@ -77,6 +131,7 @@ export default function FeedbackModal({ lenisRef }: FeedbackModalProps) {
         type="button"
         onClick={() => {
           setEmailError(null);
+          setSubmitError(null);
           setShowModal(true);
         }}
       >
@@ -88,6 +143,7 @@ export default function FeedbackModal({ lenisRef }: FeedbackModalProps) {
           className="modal-overlay"
           onClick={() => {
             setEmailError(null);
+            setSubmitError(null);
             setShowModal(false);
           }}
           aria-hidden
@@ -106,28 +162,11 @@ export default function FeedbackModal({ lenisRef }: FeedbackModalProps) {
                 alt="Portrait of Javier Prado inviting feedback"
                 src={getAsset(images, assetPaths.profileImage)}
               />
+
               <div className="image-title">Any insights?</div>
 
               <label className="input-data" htmlFor="name-input">
-                <span className="icons-container">
-                  Name
-                  <svg
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="m8 9 3 3-3 3m5 0h3M4 19h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z"
-                    />
-                  </svg>
-                </span>
+                Name
               </label>
 
               <input
@@ -150,25 +189,7 @@ export default function FeedbackModal({ lenisRef }: FeedbackModalProps) {
               />
 
               <label className="input-data" htmlFor="email-input">
-                <span className="icons-container">
-                  Email (Optional)
-                  <svg
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                    />
-                  </svg>
-                </span>
+                Email (Optional)
               </label>
 
               <input
@@ -181,13 +202,10 @@ export default function FeedbackModal({ lenisRef }: FeedbackModalProps) {
                 maxLength={254}
                 aria-invalid={emailError ? true : undefined}
                 aria-describedby={emailError ? "email-error" : undefined}
-                onInput={(e) => {
-                  syncEmailValidation(e.currentTarget);
-                }}
-                onBlur={(e) => {
-                  syncEmailValidation(e.currentTarget);
-                }}
+                onInput={(e) => syncEmailValidation(e.currentTarget)}
+                onBlur={(e) => syncEmailValidation(e.currentTarget)}
               />
+
               {emailError && (
                 <p className="field-error" id="email-error" role="alert">
                   {emailError}
@@ -195,25 +213,7 @@ export default function FeedbackModal({ lenisRef }: FeedbackModalProps) {
               )}
 
               <label className="input-data" htmlFor="msg-input">
-                <span className="icons-container">
-                  Message
-                  <svg
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M9 17h6l3 3v-3h2V9h-2M4 4h11v8H9l-3 3v-3H4V4Z"
-                    />
-                  </svg>
-                </span>
+                Message
               </label>
 
               <textarea
@@ -226,21 +226,25 @@ export default function FeedbackModal({ lenisRef }: FeedbackModalProps) {
                 rows={4}
                 required
               />
-              <button className="submit-button" type="submit">
+
+              {submitError && (
+                <p className="submit-error" role="alert">
+                  {submitError}
+                </p>
+              )}
+
+              <button
+                className="submit-button"
+                type="submit"
+                disabled={isSending}
+              >
                 {isSending ? "Sending..." : "Submit"}
               </button>
             </>
           ) : (
             <div className="form-submitted-container">
-              <div className="form-submit-btn sent">
-                <img
-                  className="sent-picture"
-                  alt="Illustration of a developer at a Mac after sending feedback"
-                  src={getAsset(images, assetPaths.developerMac)}
-                />
-              </div>
               <p className="thank-you-message">
-                ¡Appreciate it, I'll factor that in.!
+                ¡Appreciate it, I'll factor that in!
               </p>
             </div>
           )}
