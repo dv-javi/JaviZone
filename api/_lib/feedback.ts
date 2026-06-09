@@ -130,7 +130,7 @@ export async function handleFeedbackRequest(
   const resend = new Resend(env.resendApiKey);
 
   const { error } = await resend.emails.send({
-    from: `JaviZone Feedback <contact@${env.domain}>`,
+    from: `JaviZone <contact@${env.domain}>`,
     to: [env.contactEmail],
     ...(trimmedEmail ? { replyTo: trimmedEmail } : {}),
     subject: "Portfolio Feedback",
