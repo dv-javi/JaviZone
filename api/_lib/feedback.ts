@@ -107,7 +107,9 @@ export async function handleFeedbackRequest(
 
   const env = getServerEnv();
   if (!env) {
-    console.error("[feedback] Missing RESEND_API_KEY, CONTACT_EMAIL, or DOMAIN");
+    console.error(
+      "[feedback] Missing RESEND_API_KEY, CONTACT_EMAIL, or DOMAIN",
+    );
     return { ok: false, status: 500, error: "Server configuration error" };
   }
 
@@ -128,7 +130,7 @@ export async function handleFeedbackRequest(
   const resend = new Resend(env.resendApiKey);
 
   const { error } = await resend.emails.send({
-    from: `JaviZone Feedback <feedback@${env.domain}>`,
+    from: `JaviZone Feedback <contact@${env.domain}>`,
     to: [env.contactEmail],
     ...(trimmedEmail ? { replyTo: trimmedEmail } : {}),
     subject: "Portfolio Feedback",
